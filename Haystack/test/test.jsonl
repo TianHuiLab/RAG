@@ -1,0 +1,20 @@
+{"q": "This command displays the current ZTP configuration of the switch. It also displays detailed information about current state of a ZTP session. It displays information related to all configuration sections as defined in the switch provisioning information discovered in a particular ZTP session.", "a": "show ztp status [--verbose]"}
+{"q": "Use this command to enable ZTP administrative mode", "a": "config ztp enable"}
+{"q": "This command is used to add or delete the vlan.", "a": "config vlan (add | del) <vlan_id>"}
+{"q": "This command is used to add or delete multiple vlans via single command.", "a": "config vlan (add | del) -m <vlan_id>"}
+{"q": "This command is used to clear switch counters.", "a": "sonic-clear switchcounters"}
+{"q": "This command displays the global sFlow configuration that includes the admin state, collectors, the Agent ID and counter polling interval.", "a": "show sflow"}
+{"q": "This command displays PBH table configuration.", "a": "show pbh table"}
+{"q": "This command displays PBH rule configuration.", "a": "show pbh rule"}
+{"q": "This command displays MMU configuration.", "a": "show mmu [OPTIONS]"}
+{"q": "This command is used to manage switch MMU configuration.", "a": "config mmu [OPTIONS]"}
+{"Question":"display the current CPU usage on the router","Answer": "show processes cpu"}
+{"Question":"display the current memory usage on the router","Answer": "show processes memory"}
+{"Question":"clear the dynamic NAT and NAPT translation entries","Answer": "sonic-clear nat translations"}
+{"Question":"clear the statistics of all the NAT and NAPT entries","Answer": "sonic-clear nat statistics"}
+{"Question":"set the interface naming mode as default","Answer": "config interface_naming_mode default"}
+{"Question":"set the interface naming mode as alias","Answer": "config interface_naming_mode alias"}
+{"Question":"display switch hash global configuration","Answer": "show switch-hash global"}
+{"Question":"display switch hash capabilities","Answer": "show switch-hash capabilities"}
+{"Question":"display BGP device global configuration","Answer": "show bgp device-global"}
+{"Question":"shut down all the BGP IPv4 & IPv6 sessions","Answer": "config bgp shutdown all"}

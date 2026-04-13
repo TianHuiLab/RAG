@@ -1,0 +1,4 @@
+# requirements.txt
+haystack-ai>=2.0.0
+datasets>=2.6.1
+sentence-transformers>=4.1.0
