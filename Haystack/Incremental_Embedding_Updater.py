@@ -14,15 +14,15 @@ from haystack.components.embedders import SentenceTransformersDocumentEmbedder
 # =========================
 # 配置
 # =========================
-DATA_DIR = "/mnt/a100b/default/chengxi/Haystack/data"
+DATA_DIR = "/mnt/a100b/default/chengxi/RAG/Haystack/data"
 EMB_PKL_PATH = os.path.join(DATA_DIR, "embeddings.pkl")
 EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
 # 你本次要同步的输入文件
-INPUT_JSONL = "/mnt/a100b/default/chengxi/Haystack/data/1.jsonl"
+INPUT_JSONL = "/mnt/a100b/default/chengxi/RAG/Haystack/data/dangerousdealing.jsonl"
 
 # dataset 名（分区关键）
-DATASET = "Command_Reference_400"
+DATASET = "dangerousdealing"
 
 # 仅删除当前 dataset 的“缺失记录”
 DELETE_REMOVED_IN_DATASET = True

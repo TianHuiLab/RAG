@@ -30,7 +30,7 @@ set_environment()
 # =========================
 # 1) Paths
 # =========================
-EMB_PKL_PATH = "/mnt/a100b/default/chengxi/Haystack/data/embeddings.pkl"
+EMB_PKL_PATH = "/mnt/a100b/default/chengxi/RAG/Haystack/data/embeddings.pkl"
 
 
 # =========================
@@ -171,7 +171,7 @@ def main():
     rag.connect("prompt_builder.prompt", "llm.messages")
 
     # 4) run query
-    question = "在GPS接收机卡尔曼滤波定位系统中，如果接收机时钟频漂噪声的功率谱密度S_f因温度变化而显著增加，同时钟差噪声的功率谱密度S_t保持不变，这会对位置解算精度产生什么影响？请分析其机理并提出应对措施。"
+    question = "智算机载荷GPU板卡系统软件中间件 redis异常，处置措施是什么？"
 
     try:
         response = rag.run(
