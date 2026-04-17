@@ -1,0 +1,28 @@
+{
+  "models": {
+    "qwen3-8b": {
+      "base_url": "http://127.0.0.1:8000/v1",
+      "api_key": "sk-local-qwen3_8B",
+      "model": "qwen3-8b"
+    },
+    "deepseek-chat": {
+      "base_url": "http://43.159.131.233:3001/v1",
+      "api_key": "sk-KQGYH3JCKCdV7JRXDvG6ijhH18MEAGdywkknKUpxxi22H4t7",
+      "model": "deepseek-chat"
+    },
+    "qwen3.5-4b": {
+        "base_url":"http://localhost:3001/v1",
+        "api_key":"sk-local-qwen35",
+        "model": "qwen3.5-4b"
+    }
+  },
+  "active_model": "qwen3-8b",
+  "input_jsonl": "/mnt/a100b/default/chengxi/RAG/Data/sat_mc_output_thesis_v3_km03.jsonl",
+  "output_dir": "/mnt/a100b/default/chengxi/RAG",
+  "search_paths": [
+    "/mnt/a100b/default/chengxi/Base_LLM/Datasets-LLM/clearned_md"
+  ]
+}
+
+
+

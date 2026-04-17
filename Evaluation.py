@@ -9,32 +9,45 @@ from contextlib import redirect_stdout, redirect_stderr
 from sirchmunk import AgenticSearch
 from sirchmunk.llm import OpenAIChat
 
-
-
 try:
     from loguru import logger
 except ImportError:
     logger = None
 
+# ============ 加载配置 ============
+def load_config(config_path="/mnt/a100b/default/chengxi/RAG/config.json"):
+    with open(config_path, "r", encoding="utf-8") as f:
+        config = json.load(f)
+    return config
 
+config = load_config()
+
+# 获取当前激活的模型配置
+active_model = config["active_model"]
+model_config = config["models"][active_model]
+
+# 初始化 LLM
 llm = OpenAIChat(
-    base_url="http://localhost:3001/v1",
-    api_key="sk-local-qwen35",
-    model="deepseek-chat"
+    base_url=model_config["base_url"],
+    api_key=model_config["api_key"],
+    model=model_config["model"]
 )
 
-INPUT_JSONL = "/mnt/a100b/default/chengxi/RAG/RAG_Sirchmunk/sat_mc_output_thesis_v3_km03.jsonl"
-OUTPUT_JSONL = "/mnt/a100b/default/chengxi/RAG/RAG_Sirchmunk/Qwen_sat_mc_output_thesis_v3_km_test_pred_with_reason_evidence_llm_time.jsonl"
+# 动态生成输出文件名
+INPUT_JSONL = config["input_jsonl"]
+OUTPUT_JSONL = str(Path(config["output_dir"]) / f"{active_model}_sat_mc_output_thesis_v3_km_test_pred_with_reason_evidence_llm_time.jsonl")
 
-SEARCH_PATHS = [
-    "/mnt/a100b/default/chengxi/Base_LLM/Datasets-LLM/clearned_md"
-]
+SEARCH_PATHS = config["search_paths"]
 
+# 打印当前使用的配置
+print(f"当前使用模型: {active_model}")
+print(f"Base URL: {model_config['base_url']}")
+print(f"输出文件: {OUTPUT_JSONL}")
+print("-" * 50)
 
+# ============ 以下代码保持不变 ============
 def extract_choice(text: str) -> str:
-    """
-    从模型输出中提取 A/B/C/D
-    """
+    """从模型输出中提取 A/B/C/D"""
     if not text:
         return "UNKNOWN"
     m = re.search(r"\b([ABCD])\b", text.upper())

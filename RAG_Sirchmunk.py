@@ -3,12 +3,30 @@ import json
 import re
 from sirchmunk import AgenticSearch
 from sirchmunk.llm import OpenAIChat
+from pathlib import Path
 
+def load_config(config_path="/mnt/a100b/default/chengxi/RAG/config.json"):
+    with open(config_path, "r", encoding="utf-8") as f:
+        config = json.load(f)
+    return config
+
+config = load_config()
+
+# 获取当前激活的模型配置
+active_model = config["active_model"]
+model_config = config["models"][active_model]
+
+# 初始化 LLM
 llm = OpenAIChat(
-    base_url="http://43.159.131.233:3001/v1",
-    api_key="*******",
-    model="deepseek-chat"   
+    base_url = model_config["base_url"],
+    api_key = model_config["api_key"],
+    model = model_config["model"]
 )
+
+
+SEARCH_PATHS = config["search_paths"]
+
+
 
 QUERY = """CryoSat-2卫星主体呈长方体，底部一直朝向地球，装有电子设备、无线电通信天线、激光反向反射器(LRR)、两副合成孔径/干涉高度计(SIRAL)卡塞格伦天线和DORIS天线。与CryoSat-1相比，CryoSat-2在性能、测量能力和精度等方面基本一致，但进行了多项改进。下列哪项不属于CryoSat-2相对于CryoSat-1的改进措施？
 options: {
@@ -30,7 +48,7 @@ async def main():
     # 第一步：Sirchmunk 检索
     ctx = await searcher.search(
         query=QUERY,
-        paths=["/mnt/a100b/default/chengxi/Base_LLM/Datasets-LLM/clearned_md"],
+        paths=SEARCH_PATHS,
         # mode="DEEP",
         enable_dir_scan=True,
         return_context=True,
