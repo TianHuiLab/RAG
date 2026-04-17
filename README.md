@@ -53,7 +53,7 @@ UNKNOWN
   ```
 - 确保 LLM 服务地址可访问
 
-### 2. 清理缓存（可选但推荐）
+### 2. 清理缓存
 
 
 ```bash
@@ -244,7 +244,7 @@ llm = OpenAIChat(
 ### 4. 运行脚本
 
 ```bash
-python main_ds_chat.py
+python Eval_ds_chat.py
 ```
 
 脚本将依次处理每条样本，控制台实时显示进度和结果摘要。

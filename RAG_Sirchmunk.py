@@ -1,34 +1,3 @@
-'''
-# 1) 清你的断点续跑记录
-rm -f /mnt/a100b/default/chengxi/RAG/RAG_Sirchmunk/output.jsonl
-
-# 2) 清 Sirchmunk 的知识缓存
-rm -f /root/.sirchmunk/.cache/knowledge/knowledge_clusters.parquet
-
-# 3) 清 Sirchmunk 的会话历史
-rm -f /root/.sirchmunk/.cache/history/chat_history.db
-
-from pathlib import Path
-
-# 1) 清断点续跑记录
-output_file = Path("/mnt/a100b/default/chengxi/RAG/RAG_Sirchmunk/output.jsonl")
-output_file.unlink(missing_ok=True)
-
-# 2) 清 Sirchmunk 的知识缓存
-knowledge_file = Path("/root/.sirchmunk/.cache/knowledge/knowledge_clusters.parquet")
-knowledge_file.unlink(missing_ok=True)
-
-# 3) 清 Sirchmunk 的会话历史
-history_file = Path("/root/.sirchmunk/.cache/history/chat_history.db")
-history_file.unlink(missing_ok=True)
-
-print("清理完成")
-
-
-
-'''
-
-
 import asyncio
 import json
 import re
