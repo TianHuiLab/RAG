@@ -1,7 +1,7 @@
 import json
 from collections import Counter
 
-file_path = "/mnt/a100b/default/chengxi/RAG/RAG_Sirchmunk/sat_mc_output_thesis_v3_km_test_pred_with_reason_evidence_llm_time.jsonl"
+file_path = "/mnt/a100b/default/chengxi/RAG/qwen3-8b_sat_mc_output_thesis_v3_km_test_pred_with_reason_evidence_llm_time.jsonl"
 
 counter = Counter()
 total_lines = 0

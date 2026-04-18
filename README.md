@@ -295,18 +295,16 @@ python Evaluation.py
 - 请确保知识库路径可访问且包含有效的 Markdown 文件。
 - LLM 服务必须兼容 OpenAI Chat Completion API 格式。
 
-
-
 ---
 
 # 三、测试结果
 
-在相同的 770 道选择题测试集上，分别使用两种不同的后端大模型配合 Sirchmunk RAG 进行评测。以下为详细统计结果。
+在相同的 770 道选择题测试集上，分别使用三种不同的大模型配合 Sirchmunk RAG 进行评测。以下为详细统计结果。
 
 ### 配置一：Qwen3.5-4B + RAG
 
 - **模型**：Qwen3.5-4B
-- **结果文件**：`Qwen_sat_mc_output_thesis_v3_km_test_pred_with_reason_evidence_llm_time.jsonl`
+- **结果文件**：`Qwen3_5_4b_sat_mc_output_thesis_v3_km_test_pred_with_reason_evidence_llm_time`
 - **统计摘要**：
   - 总样本数：770
   - 有效样本（含 is_correct 字段）：770
@@ -321,7 +319,7 @@ python Evaluation.py
 ### 配置二：DeepSeek-Chat + RAG
 
 - **模型**：DeepSeek-Chat 
-- **结果文件**：`sat_mc_output_thesis_v3_km_test_pred_with_reason_evidence_llm_time.jsonl`
+- **结果文件**：`deepSeek_Chat_sat_mc_output_thesis_v3_km_test_pred_with_reason_evidence_llm_time`
 - **统计摘要**：
   - 总样本数：770
   - 有效样本（含 is_correct 字段）：770
@@ -334,10 +332,31 @@ python Evaluation.py
 | 答案缺失/无效 (None) | 3 |
 | **准确率** | **86.62%** |
 
+### 配置三：Qwen3-8B + RAG
+
+- **模型**：Qwen3-8B
+- **结果文件**：`qwen3-8b_sat_mc_output_thesis_v3_km_test_pred_with_reason_evidence_llm_time` 
+- **统计摘要**：
+  - 总样本数：770
+  - 有效样本（含 is_correct 字段）：770
+  - JSON 解析失败：0
+
+| 指标 | 数值 |
+|------|------|
+| 预测正确数 (True) | 507 |
+| 预测错误数 (False) | 263 |
+| **准确率** | **65.84%** |
+
 ### 结果分析
 
-1. **准确率对比**：在完全相同的检索管道和知识库条件下，Qwen3.5-4B + RAG 取得了 **88.70%** 的准确率，略高于 DeepSeek-Chat 的 **86.62%**。两者均展现了 RAG 增强后在专业选择题上的良好表现。
+1. **准确率对比**：在完全相同的检索管道和知识库条件下：
+   - **Qwen3.5-4B + RAG** 取得了最高准确率 **88.70%**
+   - **DeepSeek-Chat + RAG** 准确率为 **86.62%**
+   - **Qwen3-8B + RAG** 准确率为 **65.84%**
 
-2. **稳定性**：DeepSeek-Chat 有 3 条样本的 `is_correct` 为 `None` 出现异常，而 Qwen3.5-4B  配置下全部 770 条均成功提取到了有效预测。
+2. **稳定性**：DeepSeek-Chat 有 3 条样本的 `is_correct` 为 `None` 出现异常，而两款 Qwen 系列模型配置下全部 770 条均成功提取到了有效预测。
 
-3. **综合结论**：Sirchmunk RAG 框架能够显著提升中小规模模型在专业知识问答上的准确率。不同基座模型在指令遵循能力和推理效果上存在细微差异，实际应用时可根据场景需求（如响应速度、部署成本、准确率要求）选择合适的后端模型。
+3. **综合结论**：Sirchmunk RAG 框架能够显著提升中小规模模型在专业知识问答上的准确率。不同基座模型在指令遵循能力和推理效果上存在显著差异：
+   - Qwen3.5-4B 在本测试中表现最佳，超过参数量更大的 Qwen3-8B 约 23 个百分点
+   - Qwen3-8B 的表现相对较弱
+   - 实际应用时可根据场景需求（如响应速度、部署成本、准确率要求）选择合适的大模型
